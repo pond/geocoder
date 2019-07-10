@@ -12,8 +12,8 @@ module Geocoder
         geocoder_init(
           :geocode       => true,
           :user_address  => address_attr,
-          :latitude      => options[:latitude]  || :latitude,
-          :longitude     => options[:longitude] || :longitude,
+          :latitude      => ActiveRecord::Base.connection.quote_column_name(latitude_attr),
+          :longitude     => ActiveRecord::Base.connection.quote_column_name(longitude_attr),
           :geocode_block => block,
           :units         => options[:units],
           :method        => options[:method],
@@ -30,8 +30,8 @@ module Geocoder
         geocoder_init(
           :reverse_geocode => true,
           :fetched_address => options[:address] || :address,
-          :latitude        => latitude_attr,
-          :longitude       => longitude_attr,
+          :latitude        => ActiveRecord::Base.connection.quote_column_name(latitude_attr),
+          :longitude       => ActiveRecord::Base.connection.quote_column_name(longitude_attr),
           :reverse_block   => block,
           :units           => options[:units],
           :method          => options[:method],
