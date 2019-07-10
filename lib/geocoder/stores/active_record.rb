@@ -275,7 +275,7 @@ module Geocoder::Store
       #
       def full_column_name(column)
         column = column.to_s
-        column.include?(".") ? column : [table_name, column].join(".")
+        column.include?(".") ? column : [::ActiveRecord::Base.connection.quote_table_name(table_name), column].join(".")
       end
     end
 
